@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FormGroup, InputGroup, RadioGroup, Radio, Button } from '@blueprintjs/core';
+import axios from 'axios';
 
 const Create = () => {
   const [description, setDescription] = useState('');
@@ -12,10 +13,16 @@ const Create = () => {
 
   const onPriorityChange = e => setPriority(e.target.value);
 
-
-  const onSubmit = () => console.log(priority);
-
-
+  const onSubmit = () => {
+    console.log('haha');
+    const newTodo = {
+      description: description,
+      responsible: responsible,
+      priority: priority,
+    };
+    axios.post('https://localhost:8000/todos/add', newTodo)
+      .then(res => console.log(res.data));
+  };
 
   return (
     <div>
